@@ -1,13 +1,13 @@
+function getUserData() {
 
-
+}
 
 
 
 class Ticket {
-    constructor(title, subject, userid, user) {
+    constructor(title, subject, user) {
         this.title = title;
         this.subject = subject;
-        this.userid = userid;
         this.user = user;
     }
 
@@ -26,19 +26,19 @@ class Ticket {
                     break;
                 case 'location':
                     // Location List Grabbed From PHP
-                    list.push(/*Variables*/);
+                    list.push("Texas");
                     break;
                 case 'priority':
                     // Priority List Grabbed From PHP
-                    list.push(/*Variables*/);
+                    list.push("low");
                     break;
                 case 'issue':
                     // Issue List Grabbed From PHP
-                    list.push(/*Variables*/);
+                    list.push("Problem");
                     break;
                 case 'tech':
                     // Tech List Grabbed From PHP
-                    list.push(/*Variables*/);
+                    list.push("Test Tech");
                     break;
             };
             // iterates over list and makes them into options
@@ -56,19 +56,22 @@ class Ticket {
     };
 
     create(){
+        // Creates the divs and elements that build the ticket design
         let container = document.createElement('div');
         container.id = "ticket-container";
         container.appendChild(this.component('h2', 'ticket-title', this.title));
         //this.component('img', 'profile-pic', this.profilePic);
-        container.appendChild(this.component('h3', 'user', this.user));
-        container.appendChild(this.component('p', 'subject', this.subject));
-        container.appendChild(this.component('div', 'ticket-modal'));
-        container.appendChild(this.component('div', 'categories'));
-        container.appendChild(this.component('select', 'department'));
-        container.appendChild(this.component('select', 'location'));
-        container.appendChild(this.component('select', 'priority'));
-        container.appendChild(this.component('select', 'issue'));
-        container.appendChild(this.component('select', 'tech'));
+
+        container.appendChild(this.component('h3', 'name', this.user));
+        let modal = container.appendChild(this.component('div', 'ticket-modal', ''));
+        modal.appendChild(this.component('p', 'subject', this.subject));
+        let categories =  container.appendChild(this.component('div', 'categories', ''));
+        categories.appendChild(this.component('select', 'department'));
+        categories.appendChild(this.component('select', 'location'));
+        categories.appendChild(this.component('select', 'priority'));
+        categories.appendChild(this.component('select', 'issue'));
+        categories.appendChild(this.component('select', 'tech'));
+
 
         return container;
 
@@ -77,14 +80,14 @@ class Ticket {
 }
 
 
-
 function createTicket() {
     
-    let user = document.getElementById('user').value;
-    let subject = document.getElementById('subject').value;
+    //let user = document.getElementById('user').value;
+    let subject = document.getElementById('desc').value;
     let title = document.getElementById('title').value;
-    let userid = Math.random(); // Change
-    const ticket = new Ticket(title, subject, userid, user);
-    document.getElementById('dashboard').appendChild(ticket.create()
-    
-    );};
+    let user = document.getElementById('user').value;
+
+    const ticket = new Ticket(title, subject, user);
+    document.getElementById('dashboard').appendChild(ticket.create());
+
+};

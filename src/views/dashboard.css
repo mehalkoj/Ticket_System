@@ -1,0 +1,49 @@
+body {
+    height: auto;
+    width: auto;
+    margin: auto;
+
+}
+
+
+#dashboard {
+    height: auto;
+    width: auto;
+    margin: auto;
+    background-color: antiquewhite;
+
+}
+
+#dashboard-title {
+
+}
+
+#ticket-container {
+    height: 120px;
+    width: 700px;
+    margin-top: 30px;
+    margin-left: 10px;
+    background-color: darkcyan;
+    border-radius: 20px;
+    border-style: solid;
+
+}
+
+#ticket-title {
+    margin: 10px;
+
+}
+
+#name {
+    margin: 10px;
+
+}
+
+#subject {
+
+}
+
+#categories {
+    margin: 10px;
+
+}
