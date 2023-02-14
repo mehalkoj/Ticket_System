@@ -6,12 +6,14 @@ class Register {
     public $lname;
     public $email;
     public $pswd;
+    public $verpswd;
     
-    function __construct($fname, $lname, $email, $pswd) {
+    function __construct($fname, $lname, $email, $pswd, $verpswd) {
             $this->fname = $fname;
             $this->lname = $lname;
             $this->email = $email;
             $this->pswd = $pswd;
+            $this->verpswd = $verpswd;
         }
 
     function getConn() {
@@ -24,36 +26,37 @@ class Register {
         return $conn;
     }
 
-    function checkUser() {
-        $grab = "SELECT email FROM Users";
-        $result = $conn->query($grab);
+    function createUser($conn) {
+        // Prepares Statement
+        $grab = "SELECT email FROM Users WHERE email = ?";
+        $stmt = $conn->prepare($grab);
+        $stmt->bind_param("s", $this->email);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
-        if ($result == $this->email) {
+        // Checks if email is already registerd
+        if ($result->num_rows > 0) {
             echo "Email Is Already In Use";
+        } else {
+            $submit = "INSERT INTO Users (fname, lname, email, pswd) VALUES (?, ?, ?, ?)";
+            $stmt = $conn->prepare($submit);
+            $stmt->bind_param("ssss", $this->fname, $this->lname, $this->email, $this->pswd);
+            $stmt->execute();
+            echo "Account Created for " . $this->email;
         }
-        else {
-            $submit = "INSERT INTO MyGuests (fname, lname, email, pswd) VALUES (?, ?, ?)";
-        }
-
-
     }
-
-
-
-
-
-
 }
 
 function registerAccount() {
-    $fname = ;
-    $lname = ;
-    $email = ;
-    $pswd = ;
+    $fname = $_POST['fname'];
+    $lname = $_POST['lname'];
+    $email = $_POST['email'];
+    $pswd = $_POST['pswd'];
+    $verpswd = $_POST['verpswd'];
 
-    $register = new Register($fname, $lname, $email, $pswd);
+    $register = new Register($fname, $lname, $email, $pswd, $verpswd);
     $register.getConn();
-    $register.checkUser();
+    $register.createUser($conn);
 
 }
 

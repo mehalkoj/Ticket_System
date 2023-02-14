@@ -39,6 +39,9 @@ class Ticket {
                 case 'tech':
                     // Tech List Grabbed From PHP
                     list.push("Test Tech");
+                    list.push("Test Tech2");
+                    list.push("Test Tech3");
+                    list.push("Test Tech15325435634");
                     break;
             };
             // iterates over list and makes them into options
@@ -55,11 +58,20 @@ class Ticket {
         };
     };
 
+    
+    // Creates 
+    createlink() {
+        this.ticketLink
+
+    }
+
     create(){
         // Creates the divs and elements that build the ticket design
         let container = document.createElement('div');
         container.id = "ticket-container";
-        container.appendChild(this.component('h2', 'ticket-title', this.title));
+        let ticketTitle = container.appendChild(this.component('h2', 'ticket-title', this.title));
+        
+        
         //this.component('img', 'profile-pic', this.profilePic);
 
         container.appendChild(this.component('h3', 'name', this.user));
@@ -71,6 +83,8 @@ class Ticket {
         categories.appendChild(this.component('select', 'priority'));
         categories.appendChild(this.component('select', 'issue'));
         categories.appendChild(this.component('select', 'tech'));
+
+        
 
 
         return container;
@@ -86,7 +100,8 @@ function createTicket() {
     let subject = document.getElementById('desc').value;
     let title = document.getElementById('title').value;
     let user = document.getElementById('user').value;
-
+    let ticketLink = as;
+    let initials = user;
     const ticket = new Ticket(title, subject, user);
     document.getElementById('dashboard').appendChild(ticket.create());
 

@@ -20,7 +20,7 @@ body {
 
 #ticket-container {
     height: 120px;
-    width: 700px;
+    width: 900px;
     margin-top: 30px;
     margin-left: 10px;
     background-color: darkcyan;
@@ -30,12 +30,13 @@ body {
 }
 
 #ticket-title {
-    margin: 10px;
+    margin-left: 100px;
+    font-size: 20px;
 
 }
 
 #name {
-    margin: 10px;
+    margin-left: 100px;
 
 }
 
@@ -44,6 +45,29 @@ body {
 }
 
 #categories {
-    margin: 10px;
+    margin-top: -12px;
+    margin-left: 5in;
 
+}
+
+#tech {
+    width: 90px;
+
+}
+
+
+#modal {
+    display: none; /* shows nothing until button clicked */
+    position: fixed;
+    z-index: 1;
+    width: 400px;
+    height: 400px;
+    overflow: auto;
+    background-color: whitesmoke;
+    border-radius: 40px;
+    margin-top: -3.5in;
+    margin-left: 8in;
+    /*animation-name: animatetop;
+    animation-duration: .9s 
+*/
 }

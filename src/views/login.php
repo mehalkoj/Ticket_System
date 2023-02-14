@@ -3,14 +3,13 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Internal Ticket System</title>
+    <title>Paper Ticket</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='login.css'>
-    <script src='login.js'></script>
 </head>
 <body>
     <div class="container">
-        <H1 class="container-title">Ticket System</H1>
+        <h1 class="container-title">Internal Ticket System</h1>
         <h4 class="container-subtext">Help Desk Portal</h4>
         <div class="art3"></div>
         <div class="art2"></div>
@@ -42,7 +41,8 @@
                     <input type="text" id="pswd" name="pswd"><br>
                     <label for="verpswd">Verify Password:</label><br>
                     <input type="text" id="verpswd" name="verpswd"><br>
-                    <input type="submit" value="Submit">
+                    <input id="submitbtn" type="submit" value="Submit">
+                    <h4 id="nomatch">Passwords Do Not Match </h4>
     
                 </form> 
         </div>
@@ -67,35 +67,51 @@
 
     <script>
 
+        // Makes user verify pswd if not the same then they cant submit
+        function verify(pswd, verpswd) {
+            if (verpswd != pswd){
+                document.getElementById('nomatch').style.display = "block";
+            } elseif (verpswd == pswd){
+                document.getElementById('nomatch').style.display = "none";
+                document.getElementById("submitbtn").enabled = true;
+            }
+
+        }
+        
         // For Modals Functionality
-        const span = [document.getElementsByClassName('close')[0], document.getElementsByClassName('close')[1]]
-        const modal = [document.getElementById('register-modal'), document.getElementById('login-modal')]
-        const btn = [document.getElementById('register-btn'), document.getElementById('login-btn')]
+        function modals() {
+            const span = [document.getElementsByClassName('close')[0], document.getElementsByClassName('close')[1]];
+            const modal = [document.getElementById('register-modal'), document.getElementById('login-modal')];
+            const btn = [document.getElementById('register-btn'), document.getElementById('login-btn')];
         
-        
-        btn[0].onclick = function() {
-        modal[0].style.display = "block";
-        }
+            btn[0].onclick = function() {
+            modal[0].style.display = "block";
+            }
 
-        btn[1].onclick = function() {
+            btn[1].onclick = function() {
             modal[1].style.display = "block";
-        }
+            }
 
-        span[0].onclick = function() {
+            span[0].onclick = function() {
             modal[0].style.display = "none";
-         }
+            }
 
-         span[1].onclick = function() {
+            span[1].onclick = function() {
             modal[1].style.display = "none";
-         }
+            }
 
 
-        window.onclick = function(event) {
+            window.onclick = function(event) {
             if (modal.includes(event.target)) {
                 modal[0].style.display = "none";
                 modal[1].style.display = "none";
+                }
             }
         }
+
+    modals();
+    document.getElementById("submitbtn").disabled = true;
+    verify(document.getElementById("pswd").value, document.getElementById("verpswd").value);
 
 
     </script>
