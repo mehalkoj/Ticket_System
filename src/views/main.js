@@ -1,6 +1,6 @@
-function getUserData() {
+/*function getUserData() {
 
-}
+}*/
 
 
 
@@ -60,10 +60,10 @@ class Ticket {
 
     
     // Creates 
-    createlink() {
+    /*createlink() {
         this.ticketLink
 
-    }
+    }*/
 
     create(){
         // Creates the divs and elements that build the ticket design
@@ -100,8 +100,8 @@ function createTicket() {
     let subject = document.getElementById('desc').value;
     let title = document.getElementById('title').value;
     let user = document.getElementById('user').value;
-    let ticketLink = as;
-    let initials = user;
+    //let ticketLink = as;
+    //let initials = user;
     const ticket = new Ticket(title, subject, user);
     document.getElementById('dashboard').appendChild(ticket.create());
 

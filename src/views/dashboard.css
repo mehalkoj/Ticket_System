@@ -57,7 +57,7 @@ body {
 
 
 #modal {
-    display: none; /* shows nothing until button clicked */
+    display: block; /* shows nothing until button clicked */
     position: fixed;
     z-index: 1;
     width: 400px;
