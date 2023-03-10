@@ -1,14 +1,12 @@
-/*function getUserData() {
-
-}*/
+// Grabs JSON Data from PHP which comes from Database
 
 
 
 class Ticket {
-    constructor(title, subject, user) {
-        this.title = title;
+    constructor(header, subject, employee) {
+        this.header = header;
         this.subject = subject;
-        this.user = user;
+        this.user = employee;
     }
 
     component(type, id, innerHTML) {
@@ -59,22 +57,20 @@ class Ticket {
     };
 
     
-    // Creates 
-    /*createlink() {
-        this.ticketLink
-
-    }*/
 
     create(){
         // Creates the divs and elements that build the ticket design
         let container = document.createElement('div');
         container.id = "ticket-container";
-        let ticketTitle = container.appendChild(this.component('h2', 'ticket-title', this.title));
+        let modallink = document.createElement('a', 'modal-entry');
+        modallink.appendChild(container);
+        let ticketTitle = container.appendChild(this.component('h2', 'ticket-title', this.header));
         
         
         //this.component('img', 'profile-pic', this.profilePic);
 
         container.appendChild(this.component('h3', 'name', this.user));
+        //add users email below their name
         let modal = container.appendChild(this.component('div', 'ticket-modal', ''));
         modal.appendChild(this.component('p', 'subject', this.subject));
         let categories =  container.appendChild(this.component('div', 'categories', ''));
@@ -84,25 +80,24 @@ class Ticket {
         categories.appendChild(this.component('select', 'issue'));
         categories.appendChild(this.component('select', 'tech'));
 
-        
-
-
         return container;
 
     };
 
 }
 
-
 function createTicket() {
-    
-    //let user = document.getElementById('user').value;
-    let subject = document.getElementById('desc').value;
-    let title = document.getElementById('title').value;
-    let user = document.getElementById('user').value;
-    //let ticketLink = as;
-    //let initials = user;
-    const ticket = new Ticket(title, subject, user);
-    document.getElementById('dashboard').appendChild(ticket.create());
+    fetch('../ticket_creation.php')
+    .then(response => response.json())
+    .then(data => {
+        let tickets = data.map(ticket => new Ticket(ticket.header, ticket.subject, ticket.employee));
+        let dashboard = document.getElementById('dashboard');
+        tickets.forEach(ticket => dashboard.appendChild(ticket.create()));
+    })
+    .catch(error => console.error("Failed To Created Objects"))
+}
 
-};
+window.addEventListener("load", (event) => {
+    console.log("Refresh");
+    createTicket();
+});

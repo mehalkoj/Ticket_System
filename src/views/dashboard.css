@@ -56,8 +56,8 @@ body {
 }
 
 
-#modal {
-    display: block; /* shows nothing until button clicked */
+#ticket-modal {
+    display: none; /* shows nothing until button clicked */
     position: fixed;
     z-index: 1;
     width: 400px;
