@@ -27,6 +27,7 @@
     </form>
 
     <section id="dashboard">
+
         <h1 id="dashboard-title">Tickets</h1>
         </section>
 

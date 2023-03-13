@@ -62,8 +62,14 @@ class Ticket {
         // Creates the divs and elements that build the ticket design
         let container = document.createElement('div');
         container.id = "ticket-container";
-        let modallink = document.createElement('a', 'modal-entry');
-        modallink.appendChild(container);
+        let checkbox = document.createElement('input');
+        checkbox.type = "checkbox";
+        checkbox.id = this.header + ' - toggle';
+        checkbox.className = 'ticket-toggle';
+        container.appendChild(checkbox);
+
+        let modallink = document.createElement('a');
+        modallink.classList.add('modal-entry');
         let ticketTitle = container.appendChild(this.component('h2', 'ticket-title', this.header));
         
         
