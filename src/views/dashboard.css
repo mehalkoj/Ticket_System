@@ -71,3 +71,17 @@ body {
     animation-duration: .9s 
 */
 }
+
+.ticket-toggle{
+    margin-left: 30px;
+    margin-top:50px;
+    position: absolute;
+}
+
+.updateBox {
+    float: right;
+    margin-top: 200px;
+    border: 10px;
+    display: none;
+
+}

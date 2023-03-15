@@ -62,6 +62,7 @@ class Ticket {
         // Creates the divs and elements that build the ticket design
         let container = document.createElement('div');
         container.id = "ticket-container";
+        //let checkboxCnt = document.createElement('div');
         let checkbox = document.createElement('input');
         checkbox.type = "checkbox";
         checkbox.id = this.header + ' - toggle';
@@ -79,16 +80,29 @@ class Ticket {
         //add users email below their name
         let modal = container.appendChild(this.component('div', 'ticket-modal', ''));
         modal.appendChild(this.component('p', 'subject', this.subject));
-        let categories =  container.appendChild(this.component('div', 'categories', ''));
+        
+
+        return container;
+
+    };
+
+    // Creates The Box Of Values You Can Update When You Click A Checkbox
+    toggle(){
+
+        let updateBox = this.component('div', this.header + 'updateBox', '');
+
+        let categories = updateBox.appendChild(this.component('div', 'categories', ''));
         categories.appendChild(this.component('select', 'department'));
         categories.appendChild(this.component('select', 'location'));
         categories.appendChild(this.component('select', 'priority'));
         categories.appendChild(this.component('select', 'issue'));
         categories.appendChild(this.component('select', 'tech'));
 
-        return container;
 
-    };
+        return updateBox;
+
+    }
+
 
 }
 
@@ -99,11 +113,13 @@ function createTicket() {
         let tickets = data.map(ticket => new Ticket(ticket.header, ticket.subject, ticket.employee));
         let dashboard = document.getElementById('dashboard');
         tickets.forEach(ticket => dashboard.appendChild(ticket.create()));
+        tickets.forEach(ticket => dashboard.appendChild(ticket.toggle()));
+
     })
     .catch(error => console.error("Failed To Created Objects"))
 }
 
 window.addEventListener("load", (event) => {
-    console.log("Refresh");
+    console.log("Window Load");
     createTicket();
 });
