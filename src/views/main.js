@@ -3,10 +3,14 @@
 
 
 class Ticket {
-    constructor(header, subject, employee) {
+    constructor(id, header, subject, employee, status, email, created_at) {
+        this.id = id;
         this.header = header;
         this.subject = subject;
         this.user = employee;
+        this.status = status;
+        this.email = email;
+        this.created_at = created_at;
     }
 
     component(type, id, innerHTML) {
@@ -61,11 +65,12 @@ class Ticket {
     create(){
         // Creates the divs and elements that build the ticket design
         let container = document.createElement('div');
-        container.id = "ticket-container";
+        container.id = this.id;
+        container.className = 'ticket-container';
         //let checkboxCnt = document.createElement('div');
         let checkbox = document.createElement('input');
         checkbox.type = "checkbox";
-        checkbox.id = this.header + ' - toggle';
+        checkbox.id = this.id + ' - toggle';
         checkbox.className = 'ticket-toggle';
         container.appendChild(checkbox);
 
@@ -110,7 +115,8 @@ function createTicket() {
     fetch('../ticket_creation.php')
     .then(response => response.json())
     .then(data => {
-        let tickets = data.map(ticket => new Ticket(ticket.header, ticket.subject, ticket.employee));
+        let tickets = data.map(ticket => new Ticket(ticket.id, ticket.header, ticket.subject, ticket.employee, ticket.status, ticket.email, ticket.created_at));
+
         let dashboard = document.getElementById('dashboard');
         tickets.forEach(ticket => dashboard.appendChild(ticket.create()));
         tickets.forEach(ticket => dashboard.appendChild(ticket.toggle()));

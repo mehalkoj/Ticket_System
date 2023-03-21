@@ -43,8 +43,8 @@
 
         function ticketUpdateLink(checkbox) {
             if (checkbox.checked) {
-                const ticketId = checkbox.id;
-                console.log(ticketId + "Selected");
+                const ticket = checkbox.closest('.ticket-container');
+                console.log("Ticket "+ ticket.id + " - Selected");
             };
 
 

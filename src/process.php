@@ -21,12 +21,12 @@ $status = 'open';
 //$sql = "INSERT INTO Tickets (employee, header, subject)
 //VALUES ('$user', '$header', '$subject')";
 
-$sql = $conn->prepare('INSERT INTO Tickets (header, subject, employee, status) VALUES(?, ?, ?, ?)');
+$sql = $conn->prepare('INSERT INTO Tickets (header, subject, employee, status, issue, dept, office, email, priority, assigned) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
     if ($sql === false) {
         die("ERROR preparing statment: " . $conn->error);
     }
 
-        $sql->bind_param('ssss', $header, $subject, $user, $status);
+        $sql->bind_param('ssssssssss', $header, $subject, $user, $status, NULL, NULL, NULL, NULL, NULL, NULL);
         $sql->execute();
 
 if ($sql->affected_rows > 0) {
