@@ -13,6 +13,12 @@
 
 </head>
 <body>
+    <nav id="navbar">
+    <a href="log_view.php">
+        <button id="log" >Log Viewer</button>
+    </a>
+    </nav>
+
     <h2>Send Ticket</h2>
     <form id="test-form" action="process.php" method="POST">
         <label for="user">Username:</label><br>
@@ -32,33 +38,37 @@
         </section>
 
     <script>
+
         const dashboard = document.querySelector('#dashboard');
+        let selectedCheckbox
 
         dashboard.addEventListener('click', function(event) {
             if (event.target.classList.contains('ticket-toggle')) {
-                ticketUpdateLink(event.target);
+                selectTicketId(event.target);
             }
         });
 
+        // Gets Selected Ticket's ID, Gets The Selected ID's Update Box, and Makes It Allow Only One Check At A Time
+        function selectTicketId(checkbox) {
+            const ticket = checkbox.closest('.ticket-container');
+            const updateBox = document.getElementById(ticket.id + "-UpdateBox");
 
-        function ticketUpdateLink(checkbox) {
-            if (checkbox.checked) {
-                const ticket = checkbox.closest('.ticket-container');
+            if (selectedCheckbox && selectedCheckbox !== checkbox) {
+                selectedCheckbox.checked = false;
+                const selectedTicket = selectedCheckbox.closest('.ticket-container');
+                const selectedUpdateBox = document.getElementById(selectedTicket.id + "-UpdateBox");
+                selectedUpdateBox.style.display = 'none';
+            }
+
+            if (checkbox.checked) {  
                 console.log("Ticket "+ ticket.id + " - Selected");
-            };
-
-
-            //let ticketUUID = ticketId.split('-')[0];
-            //let updateBoxUUID = updateBoxId.split('-')[0];
-        };
-/*            if (ticketUUID.startsWith(updateBoxUUID)){
-                updateBox.style.marginRight = '200px';
-                updateBox.style.marginTop = '200px';
-                updateBox.style.border = '10px';
                 updateBox.style.display = 'block';
-            };
-        }; */
-        // Checks boxes looped so only one is selected
+                selectedCheckbox = checkbox;
+            } else {
+                updateBox.style.display = 'none';
+                selectedCheckbox = null;
+            }
+        };
         
         
 

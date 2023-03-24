@@ -50,8 +50,8 @@ if ($result->num_rows > 0) {
 }
 $conn->close();
 
-return $json_data;
-
+header('Location: index.php ' . $_SERVER['REQUEST_URI']);
+exit;
 
 
 ?>

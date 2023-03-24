@@ -79,10 +79,10 @@ body {
     position: absolute;
 }
 
-.updateBox {
-    float: right;
-    margin-top: 200px;
+.UpdateBox {
+    margin-top: 310px;
+    margin-left: 0px;
     border: 10px;
-    display: none;
+    background-color: azure;
 
 }

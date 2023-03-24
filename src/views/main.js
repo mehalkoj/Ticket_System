@@ -94,7 +94,8 @@ class Ticket {
     // Creates The Box Of Values You Can Update When You Click A Checkbox
     toggle(){
 
-        let updateBox = this.component('div', this.header + 'updateBox', '');
+        let updateBox = this.component('div', this.id + '-UpdateBox', '');
+        updateBox.className = "UpdateBox";
 
         let categories = updateBox.appendChild(this.component('div', 'categories', ''));
         categories.appendChild(this.component('select', 'department'));
